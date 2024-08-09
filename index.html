@@ -8,28 +8,35 @@
   </head>
   <body>
     <div id="app">
-      <form v-on:submit.prevent="submit">
-        <!-- <input type="text" :value="text" @keyup="updatetext" /><br /> -->
-        <input type="text" v-model="text" /><br />
-        {{text}}<br />
-        <button type="submit">Submit</button>
-      </form>
+      <!-- computed를 사용한다면 함수 뒤 괄호 필요 x -->
+      <!-- methods 의 함수를 사용한다면 함수 뒤 괄호 필요 o -->
+      <!-- watch는 데이터 변경에 대한 응답으로 비동기식 또는 시간이 많이 소요되는 조작을 수행하려는 경우에 가장 유용 -->
+      {{message}} <br />
+      <button @click="changeMessage">Click</button><br />
+      {{updated}}
     </div>
     <script>
       new Vue({
         el: "#app",
         data: {
-          text: "",
+          message: "hello",
+          updated: "아니요",
         },
         methods: {
-          submit() {
-            alert("submited");
-            console.log("submited");
+          changeMessage() {
+            this.message = "강호열";
           },
-          updatetext(e) {
-            this.text = e.target.value;
+        },
+        computed: {
+          reversedMessage() {
+            return this.message.split("").reverse().join("");
           },
-          // v-model을 쓰면은 필요 없음. 양방향 바인딩에는 v-model을 쓰면됨
+        },
+        watch: {
+          message(newVal, oldVal) {
+            console.log(newVal, oldVal);
+            this.updated = "네";
+          },
         },
       });
     </script>
