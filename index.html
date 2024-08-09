@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>뷰 기초 익히기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <form v-on:submit.prevent="submit">
+        <!-- <input type="text" :value="text" @keyup="updatetext" /><br /> -->
+        <input type="text" v-model="text" /><br />
+        {{text}}<br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          text: "",
+        },
+        methods: {
+          submit() {
+            alert("submited");
+            console.log("submited");
+          },
+          updatetext(e) {
+            this.text = e.target.value;
+          },
+          // v-model을 쓰면은 필요 없음. 양방향 바인딩에는 v-model을 쓰면됨
+        },
+      });
+    </script>
+  </body>
+</html>
